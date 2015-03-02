@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -25,18 +23,18 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mappingResources">
 		    <list>
-			    <value>com/synitl/server/hibernate/Client.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/EnforcerAdvanceSettings.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/EnforcerLogsetting.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/ExchangeAction.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/ExchangePolicy.hbm.xml</value>
- 			    <value>com/synitl/server/hibernate/Gw.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/GwValidateIpRange.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/GwValidateRange.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/Lan.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/ManageServer.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/Radius.hbm.xml</value>
-			    <value>com/synitl/server/hibernate/Radiusgroup.hbm.xml</value>
+			    <value>com/synitl/server/pojo/Client.hbm.xml</value>
+			    <value>com/synitl/server/pojo/EnforcerAdvanceSettings.hbm.xml</value>
+			    <value>com/synitl/server/pojo/EnforcerLogsetting.hbm.xml</value>
+			    <value>com/synitl/server/pojo/ExchangeAction.hbm.xml</value>
+			    <value>com/synitl/server/pojo/ExchangePolicy.hbm.xml</value>
+ 			    <value>com/synitl/server/pojo/Gw.hbm.xml</value>
+			    <value>com/synitl/server/pojo/GwValidateIpRange.hbm.xml</value>
+			    <value>com/synitl/server/pojo/GwValidateRange.hbm.xml</value>
+			    <value>com/synitl/server/pojo/Lan.hbm.xml</value>
+			    <value>com/synitl/server/pojo/ManageServer.hbm.xml</value>
+			    <value>com/synitl/server/pojo/Radius.hbm.xml</value>
+			    <value>com/synitl/server/pojo/Radiusgroup.hbm.xml</value>
 		    </list>
 	  </property>
 		<property name="hibernateProperties">

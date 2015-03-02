@@ -23,6 +23,8 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.synitl.server.hibernate.GwHibernateDAO;
+import com.synitl.server.hibernate.HibernateDAOFactory;
+import com.synitl.server.hibernate.HibernateUtil;
 import com.synitl.server.hibernate.ManageServerHibernateDAO;
 import com.synitl.server.manage.Site;
 import com.synitl.server.pojo.Client;
@@ -46,13 +48,11 @@ public class PolicyController implements ServletContextAware{
 		ms.setIp("localhost");
 		ms.setName("wahaha");
 		
-		Resource r=new ClassPathResource("../spring/applicationContext-hibernate.xml");  
-	    BeanFactory factory=new XmlBeanFactory(r);  
-		ManageServerHibernateDAO msDAO = (ManageServerHibernateDAO) factory.getBean("manageServerDAO");
+		ManageServerHibernateDAO msDAO = HibernateDAOFactory.getinstance().buildManageServerDAO();
 		msDAO.save(ms);
 		site.setMs(msDAO.findAll());
-		GwHibernateDAO gwDAO = (GwHibernateDAO)factory.getBean("gwDAO");
-		site.setGws(gwDAO.findByHttpRedirectPort(9090));
+		GwHibernateDAO gwDAO = HibernateDAOFactory.getinstance().buildGwDAO();
+		site.setGws(gwDAO.findAll());
 		model.addAttribute("site", site);
 		return "server/manage";
 	}

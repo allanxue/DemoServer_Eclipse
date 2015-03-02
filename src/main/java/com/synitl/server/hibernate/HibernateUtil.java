@@ -18,10 +18,14 @@ import org.springframework.core.io.Resource;
 public final class HibernateUtil {
 
 	private static SessionFactory sessionFactory;
+	private static BeanFactory factory;
 
 	static {
 		try {
-			sessionFactory = new Configuration().configure("../spring/applicationContext-hibernate.xml").buildSessionFactory();		
+			String path = "../spring/applicationContext-hibernate.xml";
+//			sessionFactory = new Configuration().configure(path).buildSessionFactory();	
+			Resource r=new ClassPathResource(path);  
+		    factory=new XmlBeanFactory(r);
 		} catch (Throwable ex) {
 
 			throw new ExceptionInInitializerError(ex);
@@ -41,4 +45,13 @@ public final class HibernateUtil {
 		return sessionFactory;
 	}
 
+	/*
+	 * @return bean factory
+	 */
+	public static BeanFactory getBeanFactory() {
+		return factory;
+	}
+
+	
+	
 }

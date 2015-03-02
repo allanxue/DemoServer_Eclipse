@@ -1,5 +1,7 @@
 package com.synitl.server.hibernate;
 
+import org.springframework.beans.factory.BeanFactory;
+
 import com.synitl.server.DAOFactory;
 import com.synitl.server.ClientDAO;
 import com.synitl.server.EnforcerAdvanceSettingsDAO;
@@ -22,100 +24,110 @@ import com.synitl.server.RadiusgroupDAO;
  */
 public class HibernateDAOFactory extends DAOFactory {
 
+	private static BeanFactory beanFactory = null;
+	private static HibernateDAOFactory factory = null;
+	
+	public static HibernateDAOFactory getinstance() {
+		beanFactory = HibernateUtil.getBeanFactory();
+		factory = new HibernateDAOFactory();
+		return factory;
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildClientDAO()
 	 */
 	@Override
-	public ClientDAO buildClientDAO() {
-		return new ClientHibernateDAO();
+	public ClientHibernateDAO buildClientDAO() {
+		return (ClientHibernateDAO) beanFactory.getBean("clientDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildEnforcerAdvanceSettingsDAO()
 	 */
 	@Override
-	public EnforcerAdvanceSettingsDAO buildEnforcerAdvanceSettingsDAO() {
-		return new EnforcerAdvanceSettingsHibernateDAO();
+	public EnforcerAdvanceSettingsHibernateDAO buildEnforcerAdvanceSettingsDAO() {
+		return (EnforcerAdvanceSettingsHibernateDAO) beanFactory.getBean("enforcerAdvanceSettingsDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildEnforcerLogsettingDAO()
 	 */
 	@Override
-	public EnforcerLogsettingDAO buildEnforcerLogsettingDAO() {
-		return new EnforcerLogsettingHibernateDAO();
+	public EnforcerLogsettingHibernateDAO buildEnforcerLogsettingDAO() {
+		return (EnforcerLogsettingHibernateDAO) beanFactory.getBean("enforcerLogsettingDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildExchangeActionDAO()
 	 */
 	@Override
-	public ExchangeActionDAO buildExchangeActionDAO() {
-		return new ExchangeActionHibernateDAO();
+	public ExchangeActionHibernateDAO buildExchangeActionDAO() {
+		return (ExchangeActionHibernateDAO) beanFactory.getBean("exchangeActionDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildExchangePolicyDAO()
 	 */
 	@Override
-	public ExchangePolicyDAO buildExchangePolicyDAO() {
-		return new ExchangePolicyHibernateDAO();
+	public ExchangePolicyHibernateDAO buildExchangePolicyDAO() {
+		return (ExchangePolicyHibernateDAO) beanFactory.getBean("exchangePolicyDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildGwDAO()
 	 */
 	@Override
-	public GwDAO buildGwDAO() {
-		return new GwHibernateDAO();
+	public GwHibernateDAO buildGwDAO() {
+		return (GwHibernateDAO) beanFactory.getBean("gwDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildGwValidateIpRangeDAO()
 	 */
 	@Override
-	public GwValidateIpRangeDAO buildGwValidateIpRangeDAO() {
-		return new GwValidateIpRangeHibernateDAO();
+	public GwValidateIpRangeHibernateDAO buildGwValidateIpRangeDAO() {
+		return (GwValidateIpRangeHibernateDAO) beanFactory.getBean("gwValidateIpRangeDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildGwValidateRangeDAO()
 	 */
 	@Override
-	public GwValidateRangeDAO buildGwValidateRangeDAO() {
-		return new GwValidateRangeHibernateDAO();
+	public GwValidateRangeHibernateDAO buildGwValidateRangeDAO() {
+		return (GwValidateRangeHibernateDAO) beanFactory.getBean("gwValidateRangeDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildLanDAO()
 	 */
 	@Override
-	public LanDAO buildLanDAO() {
-		return new LanHibernateDAO();
+	public LanHibernateDAO buildLanDAO() {
+		return (LanHibernateDAO) beanFactory.getBean("lanDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildManageServerDAO()
 	 */
 	@Override
-	public ManageServerDAO buildManageServerDAO() {
-		return new ManageServerHibernateDAO();
+	public ManageServerHibernateDAO buildManageServerDAO() {
+		return (ManageServerHibernateDAO) beanFactory.getBean("manageServerDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildRadiusDAO()
 	 */
 	@Override
-	public RadiusDAO buildRadiusDAO() {
-		return new RadiusHibernateDAO();
+	public RadiusHibernateDAO buildRadiusDAO() {
+		return (RadiusHibernateDAO) beanFactory.getBean("radiusDAO");
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.synitl.server.DAOFactory#buildRadiusgroupDAO()
 	 */
 	@Override
-	public RadiusgroupDAO buildRadiusgroupDAO() {
-		return new RadiusgroupHibernateDAO();
+	public RadiusgroupHibernateDAO buildRadiusgroupDAO() {
+		return (RadiusgroupHibernateDAO) beanFactory.getBean("radiusgroupDAO");
 	}
 	
 }
