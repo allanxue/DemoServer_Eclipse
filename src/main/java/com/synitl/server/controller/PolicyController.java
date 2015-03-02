@@ -6,29 +6,22 @@ import java.util.Locale;
 
 import javax.servlet.ServletContext;
 
-import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.ServletContextAware;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.synitl.server.hibernate.GwHibernateDAO;
 import com.synitl.server.hibernate.HibernateDAOFactory;
-import com.synitl.server.hibernate.HibernateUtil;
+import com.synitl.server.hibernate.LanHibernateDAO;
 import com.synitl.server.hibernate.ManageServerHibernateDAO;
 import com.synitl.server.manage.Site;
 import com.synitl.server.pojo.Client;
-import com.synitl.server.pojo.ManageServer;
 
 @Controller
 public class PolicyController implements ServletContextAware{
@@ -44,13 +37,11 @@ public class PolicyController implements ServletContextAware{
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Site site = new Site();
-		ManageServer ms = new ManageServer();
-		ms.setIp("localhost");
-		ms.setName("wahaha");
-		
 		ManageServerHibernateDAO msDAO = HibernateDAOFactory.getinstance().buildManageServerDAO();
-		msDAO.save(ms);
 		site.setMs(msDAO.findAll());
+		LanHibernateDAO lanDAO = HibernateDAOFactory.getinstance().buildLanDAO();
+		site.setLans(lanDAO.findAll());
+		
 		GwHibernateDAO gwDAO = HibernateDAOFactory.getinstance().buildGwDAO();
 		site.setGws(gwDAO.findAll());
 		model.addAttribute("site", site);
@@ -70,6 +61,8 @@ public class PolicyController implements ServletContextAware{
 		model.addAttribute("client", cli);
 		return "policy/policy";
 	}
+	
+	
 
 	@Override
 	public void setServletContext(ServletContext context) {

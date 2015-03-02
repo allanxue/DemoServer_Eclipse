@@ -6,13 +6,15 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 		<props>
-			<prop key ="policy.jsp">PolicyController</prop>
+			<!--<prop key ="policy.jsp">PolicyController</prop>  -->
 			</props>
 		</property>
 	</bean>
 	
 	<bean 
 		class="com.synitl.server.controller.PolicyController" />
+	<bean 
+		class="com.synitl.server.controller.ServerController" />
 	
 	<bean id="viewResolver"
     	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

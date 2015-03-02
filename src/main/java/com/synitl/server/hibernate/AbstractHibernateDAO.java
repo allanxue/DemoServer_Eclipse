@@ -124,17 +124,17 @@ public abstract class AbstractHibernateDAO<T, ID extends Serializable> implement
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = false)
     protected List<T> findByCriteria(Criterion... criterion) {
-    	Transaction tx = null;
+//    	Transaction tx = null;
     	try{
-    		 tx = getSession().beginTransaction();
+//    		 tx = getSession().beginTransaction();
         Criteria crit = getSession().createCriteria(getPersistentClass());
         for (Criterion c : criterion) {
             crit.add(c);
         }
         return crit.list();
     	}finally{
-    		if(tx!= null)
-    			tx.commit();
+//    		if(tx!= null)
+//    			tx.commit();
     	}
    }
    

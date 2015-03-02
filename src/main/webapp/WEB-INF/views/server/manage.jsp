@@ -18,22 +18,31 @@
 <span><spring:message  code = "server_manage_tree_root"></spring:message></span><br><hr><br>
 <ul><spring:message  code = "server_manage_tree_root"></spring:message>
 <ul><spring:message  code = "server_manage_tree_local_server"></spring:message>
-<li></li>
+<jc:if test="${site.getMs() != null}">
+<jc:forEach var = "ms"  items="${site.getMs()}">
+<li><jc:out value ="${ms.getName()}"/> </li>
+</jc:forEach>
+</jc:if>
 <jc:if test="${site.getLans() != null}">
 <ul>Lan</ul>
+<jc:forEach var = "lan"  items="${site.getLans()}">
+<li><jc:out value ="${lan.getName()}"/> </li>
+</jc:forEach>
 </jc:if>
 
 <jc:if test="${site.getGws()!= null}">
 <ul>GW</ul>
 <jc:forEach var = "gateway"  items="${site.getGws()}">
 <li><jc:out value ="${gateway.getName()}"/> </li>
-<li>haha</li>
 </jc:forEach>
 </jc:if>
 </ul>
 </ul>
-
-
+<span><spring:message  code = "server_manage_tasks"></spring:message></span><br><hr><br>
+<span><spring:message  code = "server_manage_task_edit"></spring:message></span><br>
+<span><spring:message  code = "server_manage_task_remove"></spring:message></span><br>
+<span><spring:message  code = "server_manage_task_import"></spring:message></span><br>
+<span><spring:message  code = "server_manage_task_export"></spring:message></span><br>
 </td><br> <td style="width: 92px; ">
 <span><spring:message  code = "server_manage_tree_root"></spring:message></span><br>
 <div id = 'server_detail'></div>
