@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2015 6:24:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.synitl.server.pojo.GwValidateIpRange" table="gw_validate_ip_range" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="seq" type="int">
+            <column name="seq" not-null="true" />
+        </property>
+        <property name="enable" type="java.lang.Boolean">
+            <column name="enable" />
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" />
+        </property>
+        <set name="gwValidateRangesForTrustIpRange" table="gw_validate_range" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="trust_ip_range" not-null="true" />
+            </key>
+            <one-to-many class="com.synitl.server.pojo.GwValidateRange" />
+        </set>
+        <set name="gwValidateRangesForValidateIpReange" table="gw_validate_range" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="validate_ip_reange" not-null="true" />
+            </key>
+            <one-to-many class="com.synitl.server.pojo.GwValidateRange" />
+        </set>
+    </class>
+</hibernate-mapping>

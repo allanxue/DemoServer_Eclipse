@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 26, 2015 8:51:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="EnforcerLogsetting" table="enforcer_logsetting" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="serverLogEnable" type="java.lang.Boolean">
+            <column name="server_log_enable" />
+        </property>
+        <property name="serverLogUpload" type="java.lang.Boolean">
+            <column name="server_log_upload" />
+        </property>
+        <property name="serverLogMax" type="java.lang.Integer">
+            <column name="server_log_max" />
+        </property>
+        <property name="serverLogRecord" type="java.lang.Integer">
+            <column name="server_log_record" />
+        </property>
+        <property name="clientLogEnable" type="java.lang.Boolean">
+            <column name="client_log_enable" />
+        </property>
+        <property name="clientLogUpload" type="java.lang.Boolean">
+            <column name="client_log_upload" />
+        </property>
+        <property name="clientLogMax" type="java.lang.Integer">
+            <column name="client_log_max" />
+        </property>
+        <property name="clientLogRecord" type="java.lang.Integer">
+            <column name="client_log_record" />
+        </property>
+        <property name="commLogEnable" type="java.lang.Boolean">
+            <column name="comm_log_enable" />
+        </property>
+        <property name="commLogUpload" type="java.lang.Boolean">
+            <column name="comm_log_upload" />
+        </property>
+        <property name="commLogMax" type="java.lang.Integer">
+            <column name="comm_log_max" />
+        </property>
+        <property name="commLogRecord" type="java.lang.Integer">
+            <column name="comm_log_record" />
+        </property>
+        <property name="commLogFilter" type="java.lang.Integer">
+            <column name="comm_log_filter" />
+        </property>
+        <set name="gws" table="gw" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="enforcer_logsetting" not-null="true" />
+            </key>
+            <one-to-many class="Gw" />
+        </set>
+        <set name="lans" table="lan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="enforcer_logsetting_id" not-null="true" />
+            </key>
+            <one-to-many class="Lan" />
+        </set>
+    </class>
+</hibernate-mapping>

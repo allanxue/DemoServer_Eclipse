@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2015 6:24:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.synitl.server.pojo.ExchangeAction" table="exchange_action" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="exchangePolicy" class="com.synitl.server.pojo.ExchangePolicy" fetch="select">
+            <column name="exchange_id" not-null="true" />
+        </many-to-one>
+        <property name="seq" type="int">
+            <column name="seq" not-null="true" />
+        </property>
+        <property name="hiStatus" type="java.lang.Boolean">
+            <column name="hi_status" />
+        </property>
+        <property name="userAuth" type="java.lang.Boolean">
+            <column name="user_auth" />
+        </property>
+        <property name="policyCheck" type="java.lang.Boolean">
+            <column name="policy_check" />
+        </property>
+        <property name="action" type="int">
+            <column name="action" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

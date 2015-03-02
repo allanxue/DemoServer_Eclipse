@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 26, 2015 8:51:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Radiusgroup" table="radiusgroup" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nps" type="java.lang.Boolean">
+            <column name="nps" />
+        </property>
+        <set name="radiuses" table="radius" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="group_id" not-null="true" />
+            </key>
+            <one-to-many class="Radius" />
+        </set>
+        <set name="lans" table="lan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="radiusgroup_id" not-null="true" />
+            </key>
+            <one-to-many class="Lan" />
+        </set>
+    </class>
+</hibernate-mapping>

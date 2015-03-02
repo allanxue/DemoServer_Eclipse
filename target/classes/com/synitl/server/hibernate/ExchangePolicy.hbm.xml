@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2015 6:24:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.synitl.server.pojo.ExchangePolicy" table="exchange_policy" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="lan" class="com.synitl.server.pojo.Lan" fetch="select">
+            <column name="lan_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <property name="enabled" type="java.lang.Boolean">
+            <column name="enabled" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" />
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" />
+        </property>
+        <property name="seq" type="int">
+            <column name="seq" not-null="true" />
+        </property>
+        <set name="exchangeActions" table="exchange_action" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="exchange_id" not-null="true" />
+            </key>
+            <one-to-many class="com.synitl.server.pojo.ExchangeAction" />
+        </set>
+    </class>
+</hibernate-mapping>

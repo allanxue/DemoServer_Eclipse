@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 26, 2015 8:51:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Gw" table="gw" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="enforcerAdvanceSettings" class="EnforcerAdvanceSettings" fetch="select">
+            <column name="enforcer_advancesetting" not-null="true" />
+        </many-to-one>
+        <many-to-one name="enforcerLogsetting" class="EnforcerLogsetting" fetch="select">
+            <column name="enforcer_logsetting" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gwValidateRange" class="GwValidateRange" fetch="select">
+            <column name="gw_validation_range" not-null="true" />
+        </many-to-one>
+        <property name="maxPackageEachValidation" type="java.lang.Integer">
+            <column name="max_package_each_validation" />
+        </property>
+        <property name="intervalDuringValidation" type="java.lang.Integer">
+            <column name="interval_during_validation" />
+        </property>
+        <property name="timeToBlockClient" type="java.lang.Integer">
+            <column name="time_to_block_client" />
+        </property>
+        <property name="allowTrustedClient" type="java.lang.Integer">
+            <column name="allow_trusted_client" />
+        </property>
+        <property name="allowTrustedButRecordUntrusted" type="java.lang.Boolean">
+            <column name="allow_trusted_but_record_untrusted" />
+        </property>
+        <property name="nonHiForNonWindows" type="java.lang.Boolean">
+            <column name="non_hi_for_non_windows" />
+        </property>
+        <property name="policySerialNumberFirst" type="java.lang.Boolean">
+            <column name="policy_serial_number_first" />
+        </property>
+        <property name="popupForWindowsWithoutClient" type="java.lang.Boolean">
+            <column name="popup_for_windows_without_client" />
+        </property>
+        <property name="popupMessage" type="string">
+            <column name="popup_message" />
+        </property>
+        <property name="httpRedirectWithoutClient" type="java.lang.Boolean">
+            <column name="http_redirect_without_client" />
+        </property>
+        <property name="httpRedirectUrl" type="string">
+            <column name="http_redirect_url" />
+        </property>
+        <property name="httpRedirectPort" type="java.lang.Integer">
+            <column name="http_redirect_port" />
+        </property>
+    </class>
+</hibernate-mapping>

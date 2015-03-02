@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+				http://www.springframework.org/schema/aop
+				http://www.springframework.org/schema/aop/spring-aop.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+		<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property> 
+		<property name="url"><value>jdbc:mysql://localhost/demoserver</value></property> 
+		<property name="username"><value>root</value></property> 
+		<property name="password"><value>password</value></property> 
+	</bean> 
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+		    <list>
+			    <value>com/synitl/server/hibernate/Client.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/EnforcerAdvanceSettings.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/EnforcerLogsetting.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/ExchangeAction.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/ExchangePolicy.hbm.xml</value>
+ 			    <value>com/synitl/server/hibernate/Gw.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/GwValidateIpRange.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/GwValidateRange.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/Lan.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/ManageServer.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/Radius.hbm.xml</value>
+			    <value>com/synitl/server/hibernate/Radiusgroup.hbm.xml</value>
+		    </list>
+	  </property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- Your database is MySQL 5.6 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<!-- You can also use org.hibernate.dialect.MySQL5InnoDBDialect if all your tables are InnoDBs.-->
+	
+				<prop key="hibernate.query.substitutions">Y</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- Turn batching off for better error messages under PostgreSQL 
+					<prop key="hibernate.jdbc.batch_size">0</prop> -->
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="myHibernateInterceptor"
+		class="org.springframework.orm.hibernate3.HibernateInterceptor">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="clientDAO" class="com.synitl.server.hibernate.ClientHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="enforcerAdvanceSettingsDAO" class="com.synitl.server.hibernate.EnforcerAdvanceSettingsHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="enforcerLogsettingDAO" class="com.synitl.server.hibernate.EnforcerLogsettingHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="exchangeActionDAO" class="com.synitl.server.hibernate.ExchangeActionHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="exchangePolicyDAO" class="com.synitl.server.hibernate.ExchangePolicyHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="gwDAO" class="com.synitl.server.hibernate.GwHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="gwValidateIpRangeDAO" class="com.synitl.server.hibernate.GwValidateIpRangeHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="gwValidateRangeDAO" class="com.synitl.server.hibernate.GwValidateRangeHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="lanDAO" class="com.synitl.server.hibernate.LanHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="manageServerDAO" class="com.synitl.server.hibernate.ManageServerHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="radiusDAO" class="com.synitl.server.hibernate.RadiusHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="radiusgroupDAO" class="com.synitl.server.hibernate.RadiusgroupHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

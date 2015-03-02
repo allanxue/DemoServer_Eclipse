@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 26, 2015 8:51:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Radius" table="radius" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="radiusgroup" class="Radiusgroup" fetch="select">
+            <column name="group_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" not-null="true" />
+        </property>
+        <property name="server" type="string">
+            <column name="server" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

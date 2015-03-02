@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2015 6:24:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.synitl.server.pojo.EnforcerAdvanceSettings" table="enforcer_advance_settings" catalog="demoserver" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="dhcpIpv4Allow" type="java.lang.Boolean">
+            <column name="dhcp_ipv4_allow" />
+        </property>
+        <property name="dnsIpv4Allow" type="java.lang.Boolean">
+            <column name="dns_ipv4_allow" />
+        </property>
+        <property name="arpAllow" type="java.lang.Boolean">
+            <column name="arp_allow" />
+        </property>
+        <property name="ipv6Allow" type="java.lang.Boolean">
+            <column name="ipv6_allow" />
+        </property>
+        <property name="allowNonIpAndNonArp" type="java.lang.Boolean">
+            <column name="allow_non_ip_and_non_arp" />
+        </property>
+        <property name="filter" type="string">
+            <column name="filter" />
+        </property>
+        <property name="allowLegacyClient" type="java.lang.Boolean">
+            <column name="allow_legacy_client" />
+        </property>
+        <property name="enableLocalAuth" type="java.lang.Boolean">
+            <column name="enable_local_auth" />
+        </property>
+        <property name="enableNtp" type="java.lang.Boolean">
+            <column name="enable_ntp" />
+        </property>
+        <property name="ntpServer" type="string">
+            <column name="ntp_server" />
+        </property>
+        <property name="enableServerCheck" type="java.lang.Boolean">
+            <column name="enable_server_check" />
+        </property>
+        <property name="checkInterval" type="java.lang.Integer">
+            <column name="check_interval" />
+        </property>
+        <set name="gws" table="gw" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="enforcer_advancesetting" not-null="true" />
+            </key>
+            <one-to-many class="com.synitl.server.pojo.Gw" />
+        </set>
+        <set name="lans" table="lan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="enforcer_advancesetting_id" not-null="true" />
+            </key>
+            <one-to-many class="com.synitl.server.pojo.Lan" />
+        </set>
+    </class>
+</hibernate-mapping>
